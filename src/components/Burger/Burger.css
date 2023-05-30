@@ -113,7 +113,6 @@
 
 .Burger {
   width: 100%;
-  margin: auto;
   height: 250px;
   overflow: auto;
   text-align: center;
@@ -140,4 +139,15 @@
     width: 350px;
     height: 200px;
   }
+}
+
+.Burger-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.Price {
+  font-size: 1.2rem;
+  text-align: center;
 }

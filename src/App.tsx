@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Burger, { IIngCount } from './components/Burger/Burger';
+import Controls from './components/Controls/Controls';
 import './App.css';
 
-function App() {
+const App = () => {
+
+  const [ingredients, setIngredients] =
+    useState<IIngCount[]>([
+      {name: 'Meat', count: 0},
+      {name: 'Cheese', count: 0},
+      {name: 'Salad', count: 0},
+      {name: 'Bacon', count: 0},
+    ]);
+
+  const addIngredient = (index: number) => {
+    setIngredients(prevState => {
+      const ingredientsCopy: IIngCount[] = [...prevState];
+      const ingredientCopy: IIngCount = {...ingredientsCopy[index]};
+      ingredientCopy.count++;
+      ingredientsCopy[index] = ingredientCopy;
+      return ingredientsCopy;
+    })
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Burger ingredients={ingredients}/>
+      <Controls onClickHandler={addIngredient} ingredients={ingredients} />
     </div>
   );
-}
+};
 
 export default App;
