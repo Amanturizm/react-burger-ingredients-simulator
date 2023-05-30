@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, {EventHandler, useState} from 'react';
 import Burger, { IIngCount } from './components/Burger/Burger';
 import Controls from './components/Controls/Controls';
 import './App.css';
+import {TEvent} from './components/Controls/Control/Control';
 
 const App = () => {
 
@@ -23,10 +24,21 @@ const App = () => {
     })
   };
 
+  const removeIngredient = (event: TEvent, index: number) => {
+    event.stopPropagation();
+    setIngredients(prevState => {
+      const ingredientsCopy: IIngCount[] = [...prevState];
+      const ingredientCopy: IIngCount = {...ingredientsCopy[index]};
+      ingredientCopy.count--;
+      ingredientsCopy[index] = ingredientCopy;
+      return ingredientsCopy;
+    })
+  };
+
   return (
     <div className="App">
       <Burger ingredients={ingredients}/>
-      <Controls onClickHandler={addIngredient} ingredients={ingredients} />
+      <Controls addClickHandler={addIngredient} removeClickHandler={removeIngredient} ingredients={ingredients} />
     </div>
   );
 };

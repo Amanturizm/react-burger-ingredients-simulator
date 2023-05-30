@@ -1,6 +1,6 @@
 import React, {MouseEventHandler} from 'react';
 import {IIngCount} from '../Burger/Burger';
-import Control, {IIngredient} from './Control/Control';
+import Control, {IIngredient, TEvent} from './Control/Control';
 import {nanoid} from 'nanoid';
 import meat from '../../assets/Meat.png';
 import cheese from '../../assets/Cheese.png';
@@ -17,17 +17,19 @@ const INGREDIENTS: IIngredient[] = [
 
 interface IProps {
   ingredients: IIngCount[];
-  onClickHandler: (index: number) => void;
+  addClickHandler: (index: number) => void;
+  removeClickHandler: (event: TEvent, index: number) => void;
 }
 
-const Controls: React.FC<IProps> = ({ingredients, onClickHandler}) => {
+const Controls: React.FC<IProps> = ({ingredients, addClickHandler, removeClickHandler}) => {
   return (
     <div className="controls">
       {
         ingredients.map((ingredient: IIngCount, index: number) => {
           return (
             <Control
-              add={() => onClickHandler(index)}
+              add={() => addClickHandler(index)}
+              remove={(event: TEvent) => removeClickHandler(event, index)}
               key={nanoid()}
               image={INGREDIENTS[index].image}
               name={ingredient.name}
