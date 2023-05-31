@@ -1,4 +1,4 @@
-import React, {MouseEventHandler} from 'react';
+import React from 'react';
 import './Control.css';
 
 export type TEvent = React.SyntheticEvent<EventTarget>;

@@ -9,9 +9,10 @@ export interface IIngCount {
 
 interface IProps {
   ingredients: IIngCount[];
+  price: number;
 }
 
-const Burger: React.FC<IProps> = ({ingredients}) => {
+const Burger: React.FC<IProps> = ({ingredients, price}) => {
   return (
     <div className="Burger-wrap">
       <div className="Burger">
@@ -30,7 +31,8 @@ const Burger: React.FC<IProps> = ({ingredients}) => {
         }
         <div className="BreadBottom"></div>
       </div>
-      <div className="Price">Price: <span>100сом</span></div>
+      <div className="Price">
+        Price: <span>{price}сом</span></div>
     </div>
   );
 };
